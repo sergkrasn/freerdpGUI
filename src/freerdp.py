@@ -11,9 +11,6 @@ class FreeRDP(QDialog):
 
     def freerdp(self):
         package_name = 'xfreerdp'
-        # spec = importlib.util.find_spec(package_name)
-        # if spec is None:
-        #     package_name = "./xfreerdp"
 
         server = QComboBox.currentText(self.parent.ui.server)
         password = self.parent.password
@@ -64,11 +61,6 @@ class FreeRDP(QDialog):
         if resolution != "fullscreen":
             command.append("/size:" + resolution)
 
-        process = Popen(command)
-        # procHandler = ProcHandler(Popen(command))
-        # procHandler.finished.connect(procHandler.proc_finished)
-        # procHandler.start()
-        # self.parent.save_settings()
-        # self.parent.close()
+        Popen(command)
         self.parent.save_settings()
         QCoreApplication.exit(0)

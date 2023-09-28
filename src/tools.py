@@ -1,5 +1,5 @@
 import os
-import sys
+
 from os.path import expanduser
 from PyQt6.QtCore import pyqtSignal, Qt, QCoreApplication, QFile
 from PyQt6.QtWidgets import QFrame, QLineEdit, QComboBox, QFileDialog

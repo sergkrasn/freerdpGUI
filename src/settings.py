@@ -2,7 +2,7 @@ import os
 import re
 import shutil
 
-from PyQt6.QtCore import QSettings, QCoreApplication
+from PyQt6.QtCore import QSettings
 
 
 class Settings(QSettings):

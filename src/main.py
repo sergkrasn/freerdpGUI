@@ -1,5 +1,4 @@
 import os
-import sys
 
 from PyQt6.QtCore import pyqtSignal, Qt, QCoreApplication, QFile
 from PyQt6.QtWidgets import QFrame, QComboBox, QCheckBox, QSlider

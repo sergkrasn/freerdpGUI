@@ -1,6 +1,5 @@
 from src.window import main
 import argparse
-from os import path
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='freerdpgui', usage='%(prog)s [--c]')
