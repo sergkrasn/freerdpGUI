@@ -42,6 +42,7 @@ class Tools(QFrame):
         self.ui.grab_keyboard.currentTextChanged.connect(self.choosing_grab_keyboard)
         self.ui.button_open.clicked.connect(self.openFileNameDialog)
         self.ui.button_save.clicked.connect(self.saveFileNameDialog)
+        self.ui.printers_list.currentTextChanged.connect(self.choosing_printers_list)
 
     def saveFileNameDialog(self):
         file_name, _ = QFileDialog.getSaveFileName(self, "Выбор путь для сохранения настроек",
@@ -70,6 +71,9 @@ class Tools(QFrame):
         self.settings.setValue("SETTING_DOMAIN", QLineEdit.text(self.ui.domain))
         self.dialog = Passwd(self)
         self.dialog.show()
+
+    def choosing_printers_list(self):
+        self.settings.setValue("SETTING_PRINTERS-LIST", str(self.ui.printers_list.currentText()))
 
     def check_floatbar(self):
         self.settings.setValue("SETTING_FLOATBAR", str(self.ui.floatbar.isChecked()))

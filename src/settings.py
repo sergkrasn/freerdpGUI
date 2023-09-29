@@ -36,6 +36,8 @@ class Settings(QSettings):
             printer = printer.split(" сейчас", 1)[0]
             printer = re.sub(r" is idle\..*| свободен\..*", "", printer)
             self.parent.ui.printers_list.addItem(printer)
+            if self.settings.value("SETTING_PRINTERS-LIST", str) == printer:
+                self.parent.ui.printers_list.setCurrentText(printer)
         if len(self.parent.ui.printers_list) == 0:
             self.parent.ui.label_priners.setText("Нет подключенных принтеров")
             self.parent.ui.printers.setEnabled(False)
