@@ -31,13 +31,14 @@ class Settings(QSettings):
 
         printers = os.popen("lpstat -p").readlines()
         for printer in printers:
-            printer = printer.strip()
-            printer = re.sub(r"printer |принтер ", "", printer)
-            printer = printer.split(" сейчас", 1)[0]
-            printer = re.sub(r" is idle\..*| свободен\..*", "", printer)
-            self.parent.ui.printers_list.addItem(printer)
-            if self.settings.value("SETTING_PRINTERS-LIST", str) == printer:
-                self.parent.ui.printers_list.setCurrentText(printer)
+            if re.search(r'\bprinter |принтер \b', printer):
+                printer = printer.strip()
+                printer = re.sub(r"printer |принтер ", "", printer)
+                printer = printer.split(" сейчас", 1)[0]
+                printer = re.sub(r" is idle\..*| свободен\..*", "", printer)
+                self.parent.ui.printers_list.addItem(printer)
+                if self.settings.value("SETTING_PRINTERS-LIST", str) == printer:
+                    self.parent.ui.printers_list.setCurrentText(printer)
         if len(self.parent.ui.printers_list) == 0:
             self.parent.ui.label_priners.setText("Нет подключенных принтеров")
             self.parent.ui.printers.setEnabled(False)
