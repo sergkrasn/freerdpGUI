@@ -40,7 +40,6 @@ class Settings(QSettings):
                 if self.settings.value("SETTING_PRINTERS-LIST", str) == printer:
                     self.parent.ui.printers_list.setCurrentText(printer)
         if len(self.parent.ui.printers_list) == 0:
-            self.parent.ui.label_priners.setText("Нет подключенных принтеров")
             self.parent.ui.printers.setEnabled(False)
 
         if self.parent.ui.monitors.isChecked():
