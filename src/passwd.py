@@ -38,8 +38,8 @@ class Passwd(QDialog):
             self.parent.password = QLineEdit.text(self.ui.password)
             self.settings.setValue("SETTING_USERNAME", QLineEdit.text(self.ui.username))
             self.settings.setValue("SETTING_DOMAIN", QLineEdit.text(self.ui.domain))
+            self.close()
             self.parent.freerdp.freerdp()
-            # self.close()
         else:
             msg("Не введены имя пользователя или пароль")
 

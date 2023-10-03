@@ -1,4 +1,5 @@
-from subprocess import Popen
+import subprocess
+import sys
 from PyQt6.QtCore import QCoreApplication
 from src.statick import set_value, msg
 from PyQt6.QtWidgets import QComboBox, QDialog
@@ -61,6 +62,48 @@ class FreeRDP(QDialog):
         if resolution != "fullscreen":
             command.append("/size:" + resolution)
 
-        Popen(command)
+        process = subprocess.Popen(command,
+                                   stdout=subprocess.PIPE,
+                                   stderr=subprocess.STDOUT)
+
+        try:
+            for line in iter(process.stdout.readline, ''):
+                sys.stdout.flush()
+                print(">>> " + line.rstrip())
+                if "ERRCONNECT_DNS_NAME_NOT_FOUND" in line.rstrip():
+                    msg("Ошибка при подключении\n"
+                        "Сервер не найден\n"
+                        "Ошибка: ERRCONNECT_DNS_NAME_NOT_FOUND")
+                    return
+                elif "ERRCONNECT_LOGIN_FAILURE" in line.rstrip():
+                    msg("Ошибка при подключении\n"
+                        "Проверьте правильность ввода имени пользователя или пароля\n"
+                        "Ошибка: ERRCONNECT_LOGIN_FAILURE")
+                    return
+                elif "STATUS_LOGON_FAILURE" in str(line.rstrip()):
+                    print(">>> " + str(line.rstrip()))
+                    msg("Ошибка при подключении\n"
+                        "Проверьте правильность ввода имени пользователя или пароля\n"
+                        "Ошибка: STATUS_LOGON_FAILURE")
+                sys.stdout.flush()
+        except:
+            if "ERRCONNECT_DNS_NAME_NOT_FOUND" in str(line.rstrip()):
+                print(">>> " + str(line.rstrip()))
+                msg("Ошибка при подключении\n"
+                    "Сервер не найден\n"
+                    "Ошибка: ERRCONNECT_DNS_NAME_NOT_FOUND")
+                return
+            elif "ERRCONNECT_LOGIN_FAILURE" in str(line.rstrip()):
+                print(">>> " + str(line.rstrip()))
+                msg("Ошибка при подключении\n"
+                    "Проверьте правильность ввода имени пользователя или пароля\n"
+                    "Ошибка: ERRCONNECT_LOGIN_FAILURE")
+            elif "STATUS_LOGON_FAILURE" in str(line.rstrip()):
+                print(">>> " + str(line.rstrip()))
+                msg("Ошибка при подключении\n"
+                    "Проверьте правильность ввода имени пользователя или пароля\n"
+                    "Ошибка: STATUS_LOGON_FAILURE")
+                return
+            sys.stdout.flush()
         self.parent.save_settings()
         QCoreApplication.exit(0)
