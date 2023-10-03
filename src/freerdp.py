@@ -85,6 +85,12 @@ class FreeRDP(QDialog):
                     msg("Ошибка при подключении\n"
                         "Проверьте правильность ввода имени пользователя или пароля\n"
                         "Ошибка: STATUS_LOGON_FAILURE")
+                elif "ERRCONNECT_CONNECT_FAILED" in str(line.rstrip()):
+                    print(">>> " + str(line.rstrip()))
+                    msg("Ошибка при подключении\n"
+                        "Сервер не отвечает\n"
+                        "Ошибка: ERRCONNECT_CONNECT_FAILED")
+                    return
                 sys.stdout.flush()
         except:
             if "ERRCONNECT_DNS_NAME_NOT_FOUND" in str(line.rstrip()):
@@ -103,6 +109,11 @@ class FreeRDP(QDialog):
                 msg("Ошибка при подключении\n"
                     "Проверьте правильность ввода имени пользователя или пароля\n"
                     "Ошибка: STATUS_LOGON_FAILURE")
+            elif "ERRCONNECT_CONNECT_FAILED" in str(line.rstrip()):
+                print(">>> " + str(line.rstrip()))
+                msg("Ошибка при подключении\n"
+                    "Сервер не отвечает\n"
+                    "Ошибка: ERRCONNECT_CONNECT_FAILED")
                 return
             sys.stdout.flush()
         self.parent.save_settings()
