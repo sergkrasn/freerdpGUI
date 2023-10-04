@@ -42,7 +42,7 @@ class FreeRDP(QDialog):
             command.append("/monitors:0,1")
 
         if self.parent.ui.monitors.isChecked():
-            command.append('/multimon')
+            command.append('/multimon:force')
 
         if self.parent.ui.printers.isChecked():
             command.append("/a:printer," + self.parent.ui.printers_list.currentText())
