@@ -23,8 +23,22 @@ class Settings(QSettings):
         self.parent.ui.floatbar.setChecked(self.settings.value("SETTING_FLOATBAR", True, bool))
         self.parent.ui.homedir.setChecked(self.settings.value("SETTING_HOMEDIR", True, bool))
         self.parent.ui.clipboard.setChecked(self.settings.value("SETTING_CLIPBOARD", True, bool))
+        self.parent.ui.disable_security.setChecked(self.settings.value("SETTING_DISABLE_SECURITY", False, bool))
         self.parent.ui.change_displays.setChecked(self.settings.value("SETTING_CHANGE-DISPLAY", False, bool))
         self.parent.ui.grab_keyboard.setCurrentIndex(self.settings.value("SETTING_KEYBOARD", 0, int))
+        self.parent.ui.security_protocol.setCurrentText(self.settings.value("SETTING_SECURITY_PROTOCOL", "rdp", str))
+
+        secure_list = ["rdp", "nla", "ext", "tls"]
+        for security_protocol in secure_list:
+            self.parent.ui.security_protocol.addItem(security_protocol)
+            if self.settings.value("SETTING_SECURITY_PROTOCOL", str) == security_protocol:
+                self.parent.ui.security_protocol.setCurrentText(security_protocol)
+
+
+        if self.parent.ui.disable_security.isChecked():
+            self.parent.ui.security_protocol.setEnabled(True)
+        else:
+            self.parent.ui.security_protocol.setEnabled(False)
 
         for servers in reversed(self.settings.value("SETTINGS_SERVER", [], "QStringList")):
             self.parent.ui.server.addItem(servers)

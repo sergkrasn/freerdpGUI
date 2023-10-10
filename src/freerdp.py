@@ -59,23 +59,52 @@ class FreeRDP(QDialog):
         if QComboBox.currentIndex(self.parent.ui.grab_keyboard) == 1:
             command.append("-grab-keyboard")
 
+        if self.parent.ui.disable_security.isChecked():
+            command.append("/sec:" + self.parent.ui.security_protocol.currentText())
+
         if resolution != "fullscreen":
             command.append("/size:" + resolution)
 
         process = subprocess.Popen(command,
                                    stdout=subprocess.PIPE,
                                    stderr=subprocess.STDOUT)
-
+        i = 0
         try:
             for line in iter(process.stdout.readline, ''):
-                sys.stdout.flush()
-                print(">>> " + line.rstrip())
-                if "ERRCONNECT_DNS_NAME_NOT_FOUND" in line.rstrip():
+                i +=1
+                # sys.stdout.flush()
+                print(">>> " + str(line.rstrip()))
+                if i >= 50:
+                    print(">>> " + 'Output by iteration number')
+                    break
+                elif str(line.rstrip()) == "b''":
+                    return
+                elif "ERRCONNECT_CONNECT_TRANSPORT_FAILED" in str(line.rstrip()):
+                    print(">>> " + str(line.rstrip()))
+                    msg("Ошибка при подключении\n"
+                        "Ошибка выбора протокола\n"
+                        "Ошибка: ERRCONNECT_CONNECT_TRANSPORT_FAILED")
+                    return
+                elif "HYBRID_REQUIRED_BY_SERVER" in str(line.rstrip()):
+                    print(">>> " + str(line.rstrip()))
+                    msg("Ошибка при подключении\n"
+                        "Ошибка выбора протокола\n"
+                        "Ошибка: ERRCONNECT_SECURITY_NEGO_CONNECT_FAILED")
+                    return
+                elif "ERRCONNECT_SECURITY_NEGO_CONNECT_FAILED" in str(line.rstrip()):
+                    print(">>> " + str(line.rstrip()))
+                    msg("Ошибка при подключении\n"
+                        "Ошибка выбора протокола\n"
+                        "Ошибка: ERRCONNECT_SECURITY_NEGO_CONNECT_FAILED")
+                    return
+                elif "ERRCONNECT_DNS_NAME_NOT_FOUND" in str(line.rstrip()):
+                    print(">>> " + str(line.rstrip()))
                     msg("Ошибка при подключении\n"
                         "Сервер не найден\n"
                         "Ошибка: ERRCONNECT_DNS_NAME_NOT_FOUND")
                     return
-                elif "ERRCONNECT_LOGIN_FAILURE" in line.rstrip():
+                elif "ERRCONNECT_LOGIN_FAILURE" in str(line.rstrip()):
+                    print(">>> " + str(line.rstrip()))
                     msg("Ошибка при подключении\n"
                         "Проверьте правильность ввода имени пользователя или пароля\n"
                         "Ошибка: ERRCONNECT_LOGIN_FAILURE")
@@ -91,30 +120,8 @@ class FreeRDP(QDialog):
                         "Сервер не отвечает\n"
                         "Ошибка: ERRCONNECT_CONNECT_FAILED")
                     return
-                sys.stdout.flush()
+                # sys.stdout.flush()
+            self.parent.save_settings()
+            QCoreApplication.exit(0)
         except:
-            if "ERRCONNECT_DNS_NAME_NOT_FOUND" in str(line.rstrip()):
-                print(">>> " + str(line.rstrip()))
-                msg("Ошибка при подключении\n"
-                    "Сервер не найден\n"
-                    "Ошибка: ERRCONNECT_DNS_NAME_NOT_FOUND")
-                return
-            elif "ERRCONNECT_LOGIN_FAILURE" in str(line.rstrip()):
-                print(">>> " + str(line.rstrip()))
-                msg("Ошибка при подключении\n"
-                    "Проверьте правильность ввода имени пользователя или пароля\n"
-                    "Ошибка: ERRCONNECT_LOGIN_FAILURE")
-            elif "STATUS_LOGON_FAILURE" in str(line.rstrip()):
-                print(">>> " + str(line.rstrip()))
-                msg("Ошибка при подключении\n"
-                    "Проверьте правильность ввода имени пользователя или пароля\n"
-                    "Ошибка: STATUS_LOGON_FAILURE")
-            elif "ERRCONNECT_CONNECT_FAILED" in str(line.rstrip()):
-                print(">>> " + str(line.rstrip()))
-                msg("Ошибка при подключении\n"
-                    "Сервер не отвечает\n"
-                    "Ошибка: ERRCONNECT_CONNECT_FAILED")
-                return
-            sys.stdout.flush()
-        self.parent.save_settings()
-        QCoreApplication.exit(0)
+            msg("Ошибка приложения")

@@ -39,6 +39,10 @@ class Main(QFrame):
         self.ui.grab_keyboard.hide()
         self.ui.resolution = QSlider(self)
         self.ui.resolution.hide()
+        self.ui.disable_security = QCheckBox(self)
+        self.ui.disable_security.hide()
+        self.ui.security_protocol = QComboBox(self)
+        self.ui.security_protocol.hide()
 
         QCoreApplication.setOrganizationName("freerdp")
         QCoreApplication.setApplicationName("freerdpGUI")
