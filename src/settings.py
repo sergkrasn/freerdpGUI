@@ -34,7 +34,6 @@ class Settings(QSettings):
             if self.settings.value("SETTING_SECURITY_PROTOCOL", str) == security_protocol:
                 self.parent.ui.security_protocol.setCurrentText(security_protocol)
 
-
         if self.parent.ui.disable_security.isChecked():
             self.parent.ui.security_protocol.setEnabled(True)
         else:
@@ -71,7 +70,6 @@ class Settings(QSettings):
 
     def copy_config(self):
         confpath = (('/'.join(self.settings.fileName().split('/')[:-1])) + '/' +
-             os.path.splitext(os.path.basename(self.filepath))[0]) + '.conf'
+                    os.path.splitext(os.path.basename(self.filepath))[0]) + '.conf'
         shutil.copy(self.filepath, confpath)
         self.settings = QSettings('freerdp', os.path.splitext(os.path.basename(self.filepath))[0])
-

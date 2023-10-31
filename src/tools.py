@@ -48,10 +48,20 @@ class Tools(QFrame):
 
     def saveFileNameDialog(self):
         file_name, _ = QFileDialog.getSaveFileName(self, "Выбор путь для сохранения настроек",
-                                                   expanduser("~/Desktop/" + QComboBox.currentText(self.ui.server)) + '.frdp',
+                                                   expanduser(
+                                                       "~/Desktop/" + QComboBox.currentText(self.ui.server)) + '.frdp',
                                                    "Free RDP settings files (*.frdp)")
         if file_name:
             value = '[General]\n'
+            if not "SETTINGS_SERVER" in self.settings.allKeys():
+                value += "SETTINGS_SERVER" + '=' + QComboBox.currentText(self.ui.server) + '\n'
+
+            if not "SETTING_DOMAIN" in self.settings.allKeys():
+                value += "SETTING_DOMAIN" + '=' + QLineEdit.text(self.ui.domain) + '\n'
+
+            if not "SETTING_USERNAME" in self.settings.allKeys():
+                value += "SETTING_USERNAME" + '=' + QLineEdit.text(self.ui.username) + '\n'
+
             for key in self.settings.allKeys():
                 if key == "SETTINGS_SERVER":
                     value += "SETTINGS_SERVER" + '=' + QComboBox.currentText(self.ui.server) + '\n'
@@ -124,6 +134,18 @@ class Tools(QFrame):
         if self.filepath is not None:
             QFile((('/'.join(self.settings.fileName().split('/')[:-1])) + '/' +
                    os.path.splitext(os.path.basename(self.filepath))[0]) + '.conf').remove()
+
+        if len(self.settings.value("SETTINGS_SERVER", [], "QStringList")) == 0:
+            self.settings.setValue("SETTINGS_SERVER", [QComboBox.currentText(self.ui.server)])
+        else:
+            server = []
+            for servers in self.settings.value("SETTINGS_SERVER", [], "QStringList"):
+                server.append(servers)
+            server.append(QComboBox.currentText(self.ui.server))
+            for x in server:
+                if server.count(x) > 1:
+                    server.remove(x)
+            self.settings.setValue("SETTINGS_SERVER", server)
 
     def screen_resolution(self):
         value = int(self.ui.resolution.value())
