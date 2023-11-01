@@ -28,6 +28,7 @@ class Tools(QFrame):
         QCoreApplication.setApplicationName("freerdpGUI")
         self.settings = Settings(self, filepath)
         self.screen_resolution()
+        QComboBox.setFocus(self.ui.server)
 
         self.ui.button_enter.clicked.connect(self.dialog_passwd)
         self.ui.button_tools.clicked.connect(self.toolsRequest)

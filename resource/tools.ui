@@ -107,20 +107,47 @@
             <string>Параметры входа</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_6">
-            <item row="3" column="1">
+            <item row="1" column="2">
+             <widget class="QComboBox" name="server">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
              <widget class="QLabel" name="label_14">
               <property name="text">
                <string>Домен:</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="2">
-             <widget class="QLineEdit" name="username"/>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="label_9">
+            <item row="5" column="2" colspan="2">
+             <widget class="QLabel" name="label_10">
               <property name="text">
-               <string>Введите имя удаленного компьютера</string>
+               <string>При подключение необходимо будет укаать учетные данные</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>55</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Пользователь:</string>
               </property>
              </widget>
             </item>
@@ -140,38 +167,12 @@
               </property>
              </spacer>
             </item>
-            <item row="4" column="2" colspan="2">
-             <widget class="QLabel" name="label_10">
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_9">
               <property name="text">
-               <string>При подключение необходимо будет укаать учетные данные</string>
+               <string>Введите имя удаленного компьютера</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QComboBox" name="server">
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QLineEdit" name="domain"/>
-            </item>
-            <item row="2" column="0">
-             <spacer name="horizontalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>55</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
             <item row="1" column="1">
              <widget class="QLabel" name="label_12">
@@ -180,12 +181,11 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QLabel" name="label_13">
-              <property name="text">
-               <string>Пользователь:</string>
-              </property>
-             </widget>
+            <item row="3" column="2">
+             <widget class="QLineEdit" name="username"/>
+            </item>
+            <item row="4" column="2">
+             <widget class="QLineEdit" name="domain"/>
             </item>
            </layout>
           </widget>
