@@ -86,6 +86,13 @@
       </spacer>
      </item>
      <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QTabWidget" name="tab_tools">
        <property name="tabPosition">
         <enum>QTabWidget::North</enum>
@@ -660,13 +667,6 @@
          </item>
         </layout>
        </widget>
-      </widget>
-     </item>
-     <item>
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
       </widget>
      </item>
     </layout>

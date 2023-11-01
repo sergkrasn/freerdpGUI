@@ -2,10 +2,10 @@ import os
 
 from PyQt6.QtCore import QSettings, Qt
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QPushButton, QLineEdit, QDialog
+from PyQt6.QtWidgets import QPushButton, QLineEdit, QDialog, QComboBox, QSlider, QCheckBox
 from src.ui_passwd import Ui_Passwd
 from src.statick import msg
-
+from src.settings import Settings
 
 class Passwd(QDialog):
     def __init__(self, parent=None, wx=None):
@@ -17,9 +17,34 @@ class Passwd(QDialog):
         self.setWindowIcon(QIcon(os.path.join(os.path.dirname(__file__), "../resource/freerdpgui-icon.svg")))
         self.setGeometry(760, 200, 380, 260)
 
+        self.ui.printers_list = QComboBox(self)
+        self.ui.printers_list.hide()
+        self.ui.change_displays = QCheckBox(self)
+        self.ui.change_displays.hide()
+        self.ui.monitors = QCheckBox(self)
+        self.ui.monitors.hide()
+        self.ui.printers = QCheckBox(self)
+        self.ui.printers.hide()
+        self.ui.floatbar = QCheckBox(self)
+        self.ui.floatbar.hide()
+        self.ui.clipboard = QCheckBox(self)
+        self.ui.clipboard.hide()
+        self.ui.homedir = QCheckBox(self)
+        self.ui.homedir.hide()
+        self.ui.grab_keyboard = QComboBox(self)
+        self.ui.grab_keyboard.hide()
+        self.ui.resolution = QSlider(self)
+        self.ui.resolution.hide()
+        self.ui.disable_security = QCheckBox(self)
+        self.ui.disable_security.hide()
+        self.ui.security_protocol = QComboBox(self)
+        self.ui.security_protocol.hide()
+        self.ui.server = QComboBox(self)
+        self.ui.server.hide()
+
         self.ui.password.setEchoMode(QLineEdit.EchoMode.Password)
 
-        self.settings = QSettings('freerdp', 'freerdpGUI')
+        self.settings = Settings(self, self.parent.filepath)
         self.ui.username.setText(self.settings.value("SETTING_USERNAME", "", str))
         self.ui.domain.setText(self.settings.value("SETTING_DOMAIN", "", str))
 
