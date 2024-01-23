@@ -36,13 +36,12 @@ class FreeRDP(QDialog):
         if len(self.parent.domain) != 0:
             command.append("/d:" + self.parent.domain)
 
-        if self.parent.ui.change_displays.isChecked():
-            command.append("/monitors:1,0")
-        else:
-            command.append("/monitors:0,1")
-
         if self.parent.ui.monitors.isChecked():
             command.append('/multimon:force')
+            if self.parent.ui.change_displays.isChecked():
+                command.append("/monitors:1,0")
+            else:
+                command.append("/monitors:0,1")
 
         if self.parent.ui.printers.isChecked():
             command.append("/a:printer," + self.parent.ui.printers_list.currentText())
@@ -64,6 +63,9 @@ class FreeRDP(QDialog):
 
         if resolution != "fullscreen":
             command.append("/size:" + resolution)
+        else:
+            command.append("/monitors:1")
+            command.append("/multimon")
 
         process = subprocess.Popen(command,
                                    stdout=subprocess.PIPE,
