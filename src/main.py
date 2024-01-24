@@ -1,7 +1,7 @@
 import os
 
 from PyQt6.QtCore import pyqtSignal, Qt, QCoreApplication, QFile
-from PyQt6.QtWidgets import QFrame, QComboBox, QCheckBox, QSlider
+from PyQt6.QtWidgets import QFrame, QComboBox, QCheckBox, QSlider, QRadioButton
 from src.passwd import Passwd
 from src.freerdp import FreeRDP
 from src.ui_main import Ui_Main
@@ -45,6 +45,10 @@ class Main(QFrame):
         self.ui.security_protocol.hide()
         self.ui.multimedia = QCheckBox(self)
         self.ui.multimedia.hide()
+        self.ui.monitor1 = QRadioButton(self)
+        self.ui.monitor1.hide()
+        self.ui.monitor2 = QRadioButton(self)
+        self.ui.monitor2.hide()
 
         QCoreApplication.setOrganizationName("freerdp")
         QCoreApplication.setApplicationName("freerdpGUI")

@@ -2,7 +2,7 @@ import os
 
 from PyQt6.QtCore import QSettings, Qt
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QPushButton, QLineEdit, QDialog, QComboBox, QSlider, QCheckBox
+from PyQt6.QtWidgets import QPushButton, QLineEdit, QDialog, QComboBox, QSlider, QCheckBox, QRadioButton
 from src.ui_passwd import Ui_Passwd
 from src.statick import msg
 from src.settings import Settings
@@ -43,6 +43,10 @@ class Passwd(QDialog):
         self.ui.server.hide()
         self.ui.multimedia = QCheckBox(self)
         self.ui.multimedia.hide()
+        self.ui.monitor1 = QRadioButton(self)
+        self.ui.monitor1.hide()
+        self.ui.monitor2 = QRadioButton(self)
+        self.ui.monitor2.hide()
 
         self.ui.password.setEchoMode(QLineEdit.EchoMode.Password)
 

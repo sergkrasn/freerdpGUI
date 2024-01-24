@@ -46,8 +46,12 @@ class FreeRDP(QDialog):
             if resolution != "fullscreen":
                 command.append("/size:" + resolution)
             else:
-                command.append("/monitors:0")
-                command.append("/multimon")
+                if self.parent.ui.monitor1.isChecked():
+                    command.append("/monitors:0")
+                    command.append("/multimon")
+                if self.parent.ui.monitor2.isChecked():
+                    command.append("/monitors:1")
+                    command.append("/multimon")
 
         if self.parent.ui.printers.isChecked():
             command.append("/a:printer," + self.parent.ui.printers_list.currentText())

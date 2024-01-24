@@ -28,6 +28,8 @@ class Settings(QSettings):
         self.parent.ui.grab_keyboard.setCurrentIndex(self.settings.value("SETTING_KEYBOARD", 0, int))
         self.parent.ui.security_protocol.setCurrentText(self.settings.value("SETTING_SECURITY_PROTOCOL", "rdp", str))
         self.parent.ui.multimedia.setChecked(self.settings.value("MULTIMEDIA", False, bool))
+        self.parent.ui.monitor1.setChecked(self.settings.value("MONITOR1", False, bool))
+        self.parent.ui.monitor2.setChecked(self.settings.value("MONITOR2", False, bool))
 
         secure_list = ["rdp", "nla", "ext", "tls"]
         for security_protocol in secure_list:
@@ -59,10 +61,14 @@ class Settings(QSettings):
         if self.parent.ui.monitors.isChecked():
             self.parent.ui.resolution.setEnabled(False)
             self.parent.ui.change_displays.setEnabled(True)
+            self.parent.ui.monitor1.setEnabled(False)
+            self.parent.ui.monitor2.setEnabled(False)
         else:
             self.parent.ui.resolution.setEnabled(True)
             self.parent.ui.change_displays.setEnabled(False)
             self.parent.ui.change_displays.setChecked(False)
+            self.parent.ui.monitor1.setEnabled(True)
+            self.parent.ui.monitor2.setEnabled(True)
 
         if self.parent.ui.printers.isChecked():
             self.parent.ui.printers_list.setEnabled(True)

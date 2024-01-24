@@ -366,47 +366,10 @@
             <string>Настройки отображения</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="2" column="2">
-             <widget class="QLabel" name="label_screen_resolution">
+            <item row="4" column="2">
+             <widget class="QRadioButton" name="monitor1">
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QCheckBox" name="monitors">
-              <property name="text">
-               <string>Использовать все мониторы для удаленного сеанса</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="3">
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>Больше</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Меньше</string>
+               <string>Монитор 1</string>
               </property>
              </widget>
             </item>
@@ -433,10 +396,61 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="monitors">
+              <property name="text">
+               <string>Использовать все мониторы для удаленного сеанса</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Меньше</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="2">
              <widget class="QCheckBox" name="change_displays">
               <property name="text">
                <string>Поменять рабочие столы местами</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="2">
+             <widget class="QLabel" name="label_screen_resolution">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Больше</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2">
+             <widget class="QRadioButton" name="monitor2">
+              <property name="text">
+               <string>Монитор 2</string>
               </property>
              </widget>
             </item>
@@ -454,7 +468,7 @@
            <property name="sizeHint" stdset="0">
             <size>
              <width>20</width>
-             <height>40</height>
+             <height>20</height>
             </size>
            </property>
           </spacer>

@@ -47,6 +47,8 @@ class Tools(QFrame):
         self.ui.disable_security.stateChanged.connect(self.disable_security)
         self.ui.security_protocol.currentTextChanged.connect(self.security_protocol)
         self.ui.multimedia.stateChanged.connect(self.check_multimedia)
+        self.ui.monitor1.clicked.connect(self.check_monitor1)
+        self.ui.monitor2.clicked.connect(self.check_monitor2)
 
     def saveFileNameDialog(self):
         file_name, _ = QFileDialog.getSaveFileName(self, "Выбор путь для сохранения настроек",
@@ -96,6 +98,14 @@ class Tools(QFrame):
         else:
             self.ui.security_protocol.setEnabled(False)
 
+    def check_monitor1(self):
+        self.settings.setValue("MONITOR1", str(self.ui.monitor1.isChecked()))
+        self.settings.setValue("MONITOR2", str(self.ui.monitor2.isChecked()))
+
+    def check_monitor2(self):
+        self.settings.setValue("MONITOR1", str(self.ui.monitor1.isChecked()))
+        self.settings.setValue("MONITOR2", str(self.ui.monitor2.isChecked()))
+
     def check_multimedia(self):
         self.settings.setValue("MULTIMEDIA", str(self.ui.multimedia.isChecked()))
 
@@ -127,10 +137,14 @@ class Tools(QFrame):
         if self.ui.monitors.isChecked():
             self.ui.resolution.setEnabled(False)
             self.ui.change_displays.setEnabled(True)
+            self.ui.monitor1.setEnabled(False)
+            self.ui.monitor2.setEnabled(False)
         else:
             self.ui.resolution.setEnabled(True)
             self.ui.change_displays.setEnabled(False)
             self.ui.change_displays.setChecked(False)
+            self.ui.monitor1.setEnabled(True)
+            self.ui.monitor2.setEnabled(True)
 
     def choosing_grab_keyboard(self):
         self.settings.setValue("SETTING_KEYBOARD", int(QComboBox.currentIndex(self.ui.grab_keyboard)))
@@ -156,6 +170,13 @@ class Tools(QFrame):
         value = int(self.ui.resolution.value())
         self.set_value(value)
         self.settings.setValue("SETTING_RESOLUTION", value)
+        if value != 12:
+            self.ui.monitor1.setEnabled(False)
+            self.ui.monitor2.setEnabled(False)
+        else:
+            if not self.ui.monitors.isChecked():
+                self.ui.monitor1.setEnabled(True)
+                self.ui.monitor2.setEnabled(True)
 
     def set_value(self, value):
         if value == 1:
@@ -204,7 +225,7 @@ class Tools(QFrame):
             return "1920x1080"
         if value == 12:
             self.ui.label_screen_resolution.setText("Во весь экран")
-            self.ui.monitors.setChecked(True)
+            # self.ui.monitors.setChecked(True)
             return "fullscreen"
 
     def keyPressEvent(self, event):
