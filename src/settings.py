@@ -27,6 +27,7 @@ class Settings(QSettings):
         self.parent.ui.change_displays.setChecked(self.settings.value("SETTING_CHANGE-DISPLAY", False, bool))
         self.parent.ui.grab_keyboard.setCurrentIndex(self.settings.value("SETTING_KEYBOARD", 0, int))
         self.parent.ui.security_protocol.setCurrentText(self.settings.value("SETTING_SECURITY_PROTOCOL", "rdp", str))
+        self.parent.ui.multimedia.setChecked(self.settings.value("MULTIMEDIA", False, bool))
 
         secure_list = ["rdp", "nla", "ext", "tls"]
         for security_protocol in secure_list:

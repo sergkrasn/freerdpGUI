@@ -43,6 +43,8 @@ class Main(QFrame):
         self.ui.disable_security.hide()
         self.ui.security_protocol = QComboBox(self)
         self.ui.security_protocol.hide()
+        self.ui.multimedia = QCheckBox(self)
+        self.ui.multimedia.hide()
 
         QCoreApplication.setOrganizationName("freerdp")
         QCoreApplication.setApplicationName("freerdpGUI")

@@ -46,6 +46,7 @@ class Tools(QFrame):
         self.ui.printers_list.currentTextChanged.connect(self.choosing_printers_list)
         self.ui.disable_security.stateChanged.connect(self.disable_security)
         self.ui.security_protocol.currentTextChanged.connect(self.security_protocol)
+        self.ui.multimedia.stateChanged.connect(self.check_multimedia)
 
     def saveFileNameDialog(self):
         file_name, _ = QFileDialog.getSaveFileName(self, "Выбор путь для сохранения настроек",
@@ -94,6 +95,9 @@ class Tools(QFrame):
             self.ui.security_protocol.setEnabled(True)
         else:
             self.ui.security_protocol.setEnabled(False)
+
+    def check_multimedia(self):
+        self.settings.setValue("MULTIMEDIA", str(self.ui.multimedia.isChecked()))
 
     def choosing_printers_list(self):
         self.settings.setValue("SETTING_PRINTERS-LIST", str(self.ui.printers_list.currentText()))

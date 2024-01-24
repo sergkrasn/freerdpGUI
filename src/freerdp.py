@@ -67,6 +67,11 @@ class FreeRDP(QDialog):
         if self.parent.ui.disable_security.isChecked():
             command.append("/sec:" + self.parent.ui.security_protocol.currentText())
 
+        if self.parent.ui.multimedia.isChecked():
+            command.append("/sound:sys:alsa")
+            command.append("/sound:sys:oss,dev:1,format:1")
+            command.append("/microphone:sys:alsa")
+            command.append("/microphone:sys:oss,dev:1,format:1")
 
         process = subprocess.Popen(command,
                                    stdout=subprocess.PIPE,

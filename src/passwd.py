@@ -41,6 +41,8 @@ class Passwd(QDialog):
         self.ui.security_protocol.hide()
         self.ui.server = QComboBox(self)
         self.ui.server.hide()
+        self.ui.multimedia = QCheckBox(self)
+        self.ui.multimedia.hide()
 
         self.ui.password.setEchoMode(QLineEdit.EchoMode.Password)
 
