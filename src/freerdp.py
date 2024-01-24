@@ -42,6 +42,12 @@ class FreeRDP(QDialog):
                 command.append("/monitors:1,0")
             else:
                 command.append("/monitors:0,1")
+        else:
+            if resolution != "fullscreen":
+                command.append("/size:" + resolution)
+            else:
+                command.append("/monitors:0")
+                command.append("/multimon")
 
         if self.parent.ui.printers.isChecked():
             command.append("/a:printer," + self.parent.ui.printers_list.currentText())
@@ -61,11 +67,6 @@ class FreeRDP(QDialog):
         if self.parent.ui.disable_security.isChecked():
             command.append("/sec:" + self.parent.ui.security_protocol.currentText())
 
-        if resolution != "fullscreen":
-            command.append("/size:" + resolution)
-        else:
-            command.append("/monitors:1")
-            command.append("/multimon")
 
         process = subprocess.Popen(command,
                                    stdout=subprocess.PIPE,
