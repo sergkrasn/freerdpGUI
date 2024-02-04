@@ -49,6 +49,8 @@ class Tools(QFrame):
         self.ui.multimedia.stateChanged.connect(self.check_multimedia)
         self.ui.monitor1.clicked.connect(self.check_monitor1)
         self.ui.monitor2.clicked.connect(self.check_monitor2)
+        self.ui.token_change.clicked.connect(self.token_change)
+        self.ui.token.currentTextChanged.connect(self.choosing_token_list)
 
     def saveFileNameDialog(self):
         file_name, _ = QFileDialog.getSaveFileName(self, "Выбор путь для сохранения настроек",
@@ -87,6 +89,16 @@ class Tools(QFrame):
         self.settings.setValue("SETTING_DOMAIN", QLineEdit.text(self.ui.domain))
         self.dialog = Passwd(self)
         self.dialog.show()
+
+    def token_change(self):
+        self.settings.setValue("SETTING_TOKEN_CHANGE", str(self.ui.token_change.isChecked()))
+        if self.ui.token_change.isChecked():
+            self.ui.token.setEnabled(True)
+        else:
+            self.ui.token.setEnabled(False)
+
+    def choosing_token_list(self):
+        self.settings.setValue("SETTING_TOKEN", str(self.ui.token.currentText()))
 
     def security_protocol(self):
         self.settings.setValue("SETTING_SECURITY_PROTOCOL", str(self.ui.security_protocol.currentText()))

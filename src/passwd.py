@@ -47,6 +47,10 @@ class Passwd(QDialog):
         self.ui.monitor1.hide()
         self.ui.monitor2 = QRadioButton(self)
         self.ui.monitor2.hide()
+        self.ui.token_change = QCheckBox(self)
+        self.ui.token_change.hide()
+        self.ui.token = QComboBox(self)
+        self.ui.token.hide()
 
         self.ui.password.setEchoMode(QLineEdit.EchoMode.Password)
 
