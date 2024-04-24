@@ -3,8 +3,8 @@
 -t deb
 --name "freerdpgui"
 -v 0.1.0
---iteration 6_beta
--p freerdpgui-0.1.0_6_beta-all.deb
+--iteration 6-beta
+-p freerdpgui-0.1.0_6-beta-all.deb
 --architecture all
 --category X-GNOME-NetworkSettings;Network;
 --maintainer "Sergey Krasnoslobodsev <sergkrasn@yandex.ru>"

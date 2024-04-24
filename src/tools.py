@@ -53,7 +53,7 @@ class Tools(QFrame):
         self.ui.token.currentTextChanged.connect(self.choosing_token_list)
 
     def saveFileNameDialog(self):
-        file_name, _ = QFileDialog.getSaveFileName(self, "Выбор путь для сохранения настроек",
+        file_name, _ = QFileDialog.getSaveFileName(self, "Выбор пути для сохранения настроек",
                                                    expanduser(
                                                        "~/Desktop/" + QComboBox.currentText(self.ui.server)) + '.frdp',
                                                    "Free RDP settings files (*.frdp)")

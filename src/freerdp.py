@@ -90,6 +90,7 @@ class FreeRDP(QDialog):
             if self.parent.ui.token.currentText() == "" or not os.path.exists(
                     os.path.exists(f"/opt/cprocsp/bin/{self.get_arch()}/csptest")):
                 msg("Токен не обнаружен или не установлено СКЗИ КриптоПро")
+                return
             else:
                 command.append("/smartcard:" + self.parent.ui.token.currentText())
 
