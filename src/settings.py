@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+import platform
 
 from PyQt6.QtCore import QSettings
 
@@ -30,6 +31,7 @@ class Settings(QSettings):
         self.parent.ui.multimedia.setChecked(self.settings.value("MULTIMEDIA", False, bool))
         self.parent.ui.monitor1.setChecked(self.settings.value("MONITOR1", False, bool))
         self.parent.ui.monitor2.setChecked(self.settings.value("MONITOR2", False, bool))
+        self.parent.ui.token_change.setChecked(self.settings.value("SETTING_TOKEN_CHANGE", False, bool))
 
         secure_list = ["rdp", "nla", "ext", "tls"]
         for security_protocol in secure_list:
@@ -75,8 +77,30 @@ class Settings(QSettings):
         else:
             self.parent.ui.printers_list.setEnabled(False)
 
+        if os.path.exists(f"/opt/cprocsp/bin/{self.get_arch()}/csptest"):
+            tokens = os.popen(f"/opt/cprocsp/bin/{self.get_arch()}/csptest -card -enum").readlines()
+            token_list = []
+            if tokens[-1] == "[ErrorCode: 0x00000000]\n":
+                for token in tokens[:-2]:
+                    token_list.append(token.strip())
+                    self.parent.ui.token.addItem(token)
+                    if self.settings.value("SETTING_TOKEN", str) == token:
+                        self.parent.ui.token.setCurrentText(token)
+
     def copy_config(self):
         confpath = (('/'.join(self.settings.fileName().split('/')[:-1])) + '/' +
                     os.path.splitext(os.path.basename(self.filepath))[0]) + '.conf'
         shutil.copy(self.filepath, confpath)
         self.settings = QSettings('freerdp', os.path.splitext(os.path.basename(self.filepath))[0])
+
+    @staticmethod
+    def get_arch():
+        if platform.machine() == 'x86_64':
+            return 'amd64'
+        elif platform.machine() == 'i686':
+            return 'ia32'
+
+
+
+
+

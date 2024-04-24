@@ -1,3 +1,5 @@
+import os
+import platform
 import subprocess
 import sys
 from PyQt6.QtCore import QCoreApplication
@@ -9,6 +11,13 @@ class FreeRDP(QDialog):
     def __init__(self, parent=None, wx=None):
         super(FreeRDP, self).__init__(parent)
         self.parent = parent
+
+    @staticmethod
+    def get_arch():
+        if platform.machine() == 'x86_64':
+            return 'amd64'
+        elif platform.machine() == 'i686':
+            return 'ia32'
 
     def freerdp(self):
         package_name = 'xfreerdp'
@@ -76,6 +85,14 @@ class FreeRDP(QDialog):
             command.append("/sound:sys:oss,dev:1,format:1")
             command.append("/microphone:sys:alsa")
             command.append("/microphone:sys:oss,dev:1,format:1")
+
+        if self.parent.ui.token_change.isChecked():
+            if self.parent.ui.token.currentText() == "" or not os.path.exists(
+                    os.path.exists(f"/opt/cprocsp/bin/{self.get_arch()}/csptest")):
+                msg("Токен не обнаружен или не установлено СКЗИ КриптоПро")
+                return
+            else:
+                command.append("/smartcard:" + self.parent.ui.token.currentText())
 
         process = subprocess.Popen(command,
                                    stdout=subprocess.PIPE,
