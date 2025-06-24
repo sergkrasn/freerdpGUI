@@ -41,7 +41,7 @@ class FreeRDP(QDialog):
                        "/u:" + self.parent.username,
                        "/p:" + password,
                        "/cert:ignore",
-                       "/timezone:off"]
+                       "/relax-order-checks"]
 
         if len(self.parent.domain) != 0:
             command.append("/d:" + self.parent.domain)
