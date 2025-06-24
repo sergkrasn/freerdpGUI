@@ -40,7 +40,8 @@ class FreeRDP(QDialog):
                        "/v:" + server,
                        "/u:" + self.parent.username,
                        "/p:" + password,
-                       "/cert:ignore"]
+                       "/cert:ignore",
+                       "/timezone:off"]
 
         if len(self.parent.domain) != 0:
             command.append("/d:" + self.parent.domain)
