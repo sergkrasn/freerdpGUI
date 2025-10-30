@@ -11,7 +11,7 @@ mkdir -p package/usr/bin
 cp -r dist/freerdpgui package/opt/freerdpgui
 cp resource/freerdpgui-icon.svg package/usr/share/icons/hicolor/scalable/apps/freerdpgui-icon.svg
 cp resource/freerdpgui-mime.xml package/usr/share/mime/packages/freerdpgui-mime.xml
-cp resource/FreerdpGUI.desktop package/usr/share/applications
+cp resource/freerdpgui.desktop package/usr/share/applications
 cp resource/freerdpgui package/usr/bin/freerdpgui
 
 # Change permissions

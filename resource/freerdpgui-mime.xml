@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
     <mime-type type="application/x-freerdpgui">
-        <sub-class-of type="text/plain"/>
-        <comment>Remote Desktop file</comment>
+        <comment>FreeRDP GUI connection file</comment>
+        <comment xml:lang="ru">Файл подключения FreeRDP GUI</comment>
         <glob pattern="*.frdp"/>
         <icon name="freerdpgui-icon"/>
+        <sub-class-of type="text/plain"/>
     </mime-type>
 </mime-info>

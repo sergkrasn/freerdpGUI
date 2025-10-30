@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=FreerdpGUI
+Name[ru]=FreerdpGUI
+GenericName=RDP Client
+GenericName[ru]=Клиент RDP
+Comment=Graphical interface for FreeRDP remote desktop client
+Comment[ru]=Графический интерфейс для клиента удаленного рабочего стола FreeRDP
+Exec=freerdpgui
+Icon=freerdpgui-icon
+Categories=Network;
+Keywords=rdp;remote;desktop;freerdp;windows;connection;frdp;
+Keywords[ru]=rdp;удаленный;рабочий;стол;freerdp;windows;подключение;frdp;
+Terminal=false
+StartupNotify=true
+MimeType=application/x-freerdpgui;
