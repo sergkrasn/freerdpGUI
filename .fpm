@@ -3,12 +3,13 @@
 -t deb
 --name "freerdpgui"
 -v 0.1.0
---iteration 7
--p freerdpgui-0.1.0_7-all.deb
---architecture all
---category X-GNOME-NetworkSettings;Network;
+--iteration "7+astra1.7"
+-p freerdpgui-0.1.0_7+astra1.7.deb
+--architecture amd64
+--category "X-GNOME-NetworkSettings;Network;"
 --maintainer "Sergey Krasnoslobodsev <sergkrasn@yandex.ru>"
 --license "Apache License Version 2.0"
 --url "https://github.com/sergkrasn/freerdpGUI"
---depends freerdp2-x11
+--depends freerdp3-x11
+--depends python3.11
 --description "Standalone FreerdpGUI graphical application for running xfreerdp in Linux-based operating systems"
